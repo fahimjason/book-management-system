@@ -4,7 +4,10 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { Author } from '../../authors/entities/author.entity';
 
 @Entity('books')
 export class Book {
@@ -25,6 +28,10 @@ export class Book {
 
   @Column()
   authorId: string;
+
+  @ManyToOne(() => Author, (author) => author.books)
+  @JoinColumn({ name: 'authorId' })
+  author: Author;
 
   @CreateDateColumn()
   createdAt: Date;

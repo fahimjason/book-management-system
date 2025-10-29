@@ -1,6 +1,7 @@
 import {
   Injectable,
   NotFoundException,
+  ConflictException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, ILike } from 'typeorm';
@@ -47,7 +48,17 @@ export class AuthorsService {
 
   async findOne(id: string): Promise<Author> {
     const author = await this.authorsRepository.findOne({
-      where: { id }
+      where: { id },
+      relations: ['books'],
+      select: {
+        books: {
+          id: true,
+          title: true,
+          isbn: true,
+          publishedDate: true,
+          genre: true,
+        }
+      }
     });
 
     if (!author) {
@@ -65,11 +76,18 @@ export class AuthorsService {
 
   async remove(id: string): Promise<void> {
     const author = await this.authorsRepository.findOne({
-      where: { id }
+      where: { id },
+      relations: ['books'],
     });
 
     if (!author) {
       throw new NotFoundException(`Author with ID ${id} not found`);
+    }
+
+    if (author.books && author.books.length > 0) {
+      throw new ConflictException(
+        `Cannot delete author with associated books. Please delete or reassign the books first.`,
+      );
     }
 
     await this.authorsRepository.remove(author);

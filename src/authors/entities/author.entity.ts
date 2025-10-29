@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Book } from 'src/books/entities/book.entity';
 
 @Entity('Authors')
 export class Author {
@@ -28,4 +30,7 @@ export class Author {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Book, (book) => book.author)
+  books: Book[];
 }

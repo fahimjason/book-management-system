@@ -65,6 +65,15 @@ export class BooksService {
       skip,
       take: limit,
       order: { createdAt: 'DESC' },
+      relations: ['author'],
+      select: {
+        author: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          bio: true,
+        },
+      },
     });
 
     return { data, total, page, limit };
@@ -73,6 +82,16 @@ export class BooksService {
   async findOne(id: string): Promise<Book> {
     const book = await this.booksRepository.findOne({
       where: { id },
+      relations: ['author'],
+      select: {
+        author: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          bio: true,
+          birthDate: true,
+        },
+      }
     });
 
     if (!book) {
