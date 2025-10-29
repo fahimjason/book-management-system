@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import appConfig from './config/app.config';
 import { AuthorsModule } from './authors/authors.module';
+import { BooksModule } from './books/books.module';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 const settings = require('../ormconfig.js');
 
@@ -17,7 +18,8 @@ const settings = require('../ormconfig.js');
       envFilePath: ['.env'],
     }),
     TypeOrmModule.forRoot(settings),
-    AuthorsModule
+    AuthorsModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [
