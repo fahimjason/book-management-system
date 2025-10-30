@@ -1,0 +1,61 @@
+### Create a new author
+POST http://localhost:3000/authors
+Content-Type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "bio": "Author bio goes here.",
+    "birthDate": "1990-01-01"
+}
+
+### Find all authors
+GET http://localhost:3000/authors?page=1&limit=10&firstName=J.K.
+
+### Find a particular author with given ID
+GET http://localhost:3000/authors/93f2d6cc-2890-473f-8d9b-870251cf4578
+
+### Update an author
+PATCH http://localhost:3000/authors/93f2d6cc-2890-473f-8d9b-870251cf4578
+Content-Type: application/json
+
+{
+    "bio": "user.demo"
+}
+
+### Delete an author with a given ID
+DELETE http://localhost:3000/authors/93f2d6cc-2890-473f-8d9b-870251cf4578
+
+
+### Create a new book
+POST http://localhost:3000/books
+Content-Type: application/json
+
+{
+    "title": "First Book 2",
+    "isbn": "978-0-7475-3269-9",
+    "publishedDate": "2000-01-01",
+    "genre": "",
+    "authorId": "93f2d6cc-2890-473f-8d9b-870251cf4578"
+}
+
+### Find all books
+GET http://localhost:3000/books
+
+### Find a particular book with given ID
+GET http://localhost:3000/books/50de4eaa-ef2c-4337-9dce-e9c00db4b78e
+
+### Update a book
+PATCH http://localhost:3000/books/50de4eaa-ef2c-4337-9dce-e9c00db4b78e
+Content-Type: application/json
+
+{
+    "title": "First Book",
+    "isbn": "9780132350884",
+    "publishedDate": "2000-01-01",
+    "genre": "Software Engineering",
+    "authorId": "93f2d6cc-2890-473f-8d9b-870251cf4578"
+}
+
+### Delete a book with a given ID
+DELETE http://localhost:3000/books/50de4eaa-ef2c-4337-9dce-e9c00db4b78e
