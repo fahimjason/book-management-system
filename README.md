@@ -64,6 +64,8 @@ npm run test:cov
 - `PATCH /books/:id` - Update a book
 - `DELETE /books/:id` - Delete a book
 
+[Click here](https://documenter.getpostman.com/view/17345473/2sB3Wnx2Xz) to visit <b>Postman API documentation</b>
+
 ## Example Requests
 
 ### Create Author
