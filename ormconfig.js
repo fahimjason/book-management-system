@@ -21,7 +21,7 @@ switch (process.env.NODE_ENV) {
     case 'test':
         Object.assign(dbConfig, {
             type: 'sqlite',
-            database: 'test.sqlite',
+            database: 'test.sqlite', // Use in-memory DB for tests (prevents I/O errors)
             entities: ['**/*.entity.ts'],
             migrationsRun: true
         });
